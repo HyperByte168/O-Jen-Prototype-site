@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>O‑Jen AI • Job Listings</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-black via-gray-900 to-purple-900 text-white min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <nav class="bg-gradient-to-r from-indigo-800 to-purple-800 shadow-lg p-4">
+    <div class="max-w-6xl mx-auto flex items-center justify-between">
+      <a href="home.html" class="flex items-center space-x-2">
+        <img src="logo.png" alt="O‑Jen Logo" class="h-8 w-8"/>
+        <span class="text-xl font-semibold">O‑Jen AI</span>
+      </a>
+      <ul class="flex space-x-6">
+        <li><a href="joblists.html" class="text-pink-300 font-medium">Jobs</a></li>
+        <li><a href="dashboard.html" class="hover:text-pink-300">Global Dashboard</a></li>
+        <li><a href="#" class="hover:text-pink-300">Analytics</a></li>
+        <li><a href="#" class="hover:text-pink-300">Reports</a></li>
+        <button aria-label="Settings">
+          <img src="settings.png" alt="Settings" class="h-5 w-5 hover:opacity-80"/>
+        </button>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Page Header + Filter Tabs -->
+  <header class="flex-shrink-0">
+
+    <!-- Title Container -->
+    <div class="max-w-6xl mx-auto px-4 py-6">
+      <h1 class="text-3xl font-bold text-white">Job Positions</h1>
+      <p class="text-pink-300">Select a role to view its fairness & candidate dashboard</p>
+    </div>
+
+    <!-- Tabs + Search: Same full-width constrained wrapper -->
+    <div class="max-w-6xl mx-auto px-4 pb-4 space-y-4">
+
+      <!-- Filter Tabs -->
+      <div class="flex w-full space-x-4 overflow-x-auto bg-transparent">
+        <button class="px-4 py-2 bg-blue-600 rounded-full">All Jobs (8)</button>
+        <button class="px-4 py-2 bg-indigo-700 rounded-full">Draft (1)</button>
+        <button class="px-4 py-2 bg-indigo-700 rounded-full">Open (3)</button>
+        <button class="px-4 py-2 bg-indigo-700 rounded-full">On Hold (2)</button>
+        <button class="px-4 py-2 bg-indigo-700 rounded-full">Closed (2)</button>
+      </div>
+
+      <!-- Search & Filter Row -->
+      <div class="flex w-full items-center space-x-4 bg-transparent">
+        <!-- Search Bar (flex‑1 to fill) -->
+        <div class="flex flex-1 items-center bg-indigo-800 rounded-full px-3 py-1">
+          <img src="search.png" alt="Search" class="h-5 w-5 text-pink-300 mr-2"/>
+          <input 
+            type="text" 
+            placeholder="Search jobs…" 
+            class="bg-transparent focus:outline-none w-full text-white" 
+          />
+        </div>
+        <!-- Filter Button -->
+        <button class="flex-none flex items-center bg-indigo-800 rounded-full px-4 py-2">
+          <svg class="h-5 w-5 text-pink-300 mr-2" fill="none" stroke="currentColor" stroke-width="2"
+            viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L15 12.414V19a1 1 0 01-.553.894l-4 2A1 1 0 019 21v-8.586L3.293 6.707A1 1 0 013 6V4z"/></svg>
+          Filter
+        </button>
+      </div> 
+    </div>
+  </header>
+
+
+  <!-- Job List Table -->
+  <main class="flex-grow max-w-6xl mx-auto px-4 pb-12 overflow-y-auto">
+    <div class="overflow-x-auto bg-indigo-800 rounded-2xl shadow-lg">
+      <table class="min-w-full divide-y divide-purple-700">
+        <thead class="bg-indigo-900">
+          <tr>
+            <th class="px-6 py-3 text-left text-sm font-medium text-pink-300">Job Title</th>
+            <th class="px-6 py-3 text-left text-sm font-medium text-pink-300">Status</th>
+            <th class="px-6 py-3 text-left text-sm font-medium text-pink-300">Department</th>
+            <th class="px-6 py-3 text-left text-sm font-medium text-pink-300">Location</th>
+            <th class="px-6 py-3 text-left text-sm font-medium text-pink-300">Applicants</th>
+            <th class="px-6 py-3 text-left text-sm font-medium text-pink-300">Fairness</th>
+            <th class="px-6 py-3"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-purple-700">
+          <tr class="bg-indigo-800">
+            <td class="px-6 py-4">Senior Software Engineer</td>
+            <td class="px-6 py-4">Open</td>
+            <td class="px-6 py-4">Engineering</td>
+            <td class="px-6 py-4">Selangor, Malaysia</td>
+            <td class="px-6 py-4">100</td>
+            <td class="px-6 py-4">82/100</td>
+            <td class="px-6 py-4 text-right">
+              <a href="dashboard.html" class="bg-pink-500 hover:bg-pink-600 px-4 py-2 rounded-full text-sm shadow">
+                View Dashboard
+              </a>
+            </td>
+          </tr>
+          <tr class="bg-indigo-900">
+            <td class="px-6 py-4">Product Manager</td>
+            <td class="px-6 py-4">On Hold</td>
+            <td class="px-6 py-4">Product</td>
+            <td class="px-6 py-4">Clayton, Australia</td>
+            <td class="px-6 py-4">80</td>
+            <td class="px-6 py-4">96/100</td>
+            <td class="px-6 py-4 text-right">
+              <a href="#" onclick="event.preventDefault()" class="bg-pink-500 hover:bg-pink-600 px-4 py-2 rounded-full text-sm shadow">
+                View Dashboard
+              </a>
+            </td>
+          </tr>
+          <tr class="bg-indigo-800">
+            <td class="px-6 py-4">UX Designer</td>
+            <td class="px-6 py-4">Closed</td>
+            <td class="px-6 py-4">Design</td>
+            <td class="px-6 py-4">Remote</td>
+            <td class="px-6 py-4">45</td>
+            <td class="px-6 py-4">91/100</td>
+            <td class="px-6 py-4 text-right">
+              <a href="#" onclick="event.preventDefault()" class="bg-pink-500 hover:bg-pink-600 px-4 py-2 rounded-full text-sm shadow">
+                View Dashboard
+              </a>
+            </td>
+          </tr>
+          <tr class="bg-indigo-800">
+            <td class="px-6 py-4">Data Scientist</td>
+            <td class="px-6 py-4">Open</td>
+            <td class="px-6 py-4">Data</td>
+            <td class="px-6 py-4">Boston, MA</td>
+            <td class="px-6 py-4">60</td>
+            <td class="px-6 py-4">85/100</td>
+            <td class="px-6 py-4 text-right">
+              <a href="#" onclick="event.preventDefault()" class="bg-pink-500 hover:bg-pink-600 px-4 py-2 rounded-full text-sm shadow">
+                View Dashboard
+              </a>
+            </td>
+          </tr>
+          <tr class="bg-indigo-800">
+            <td class="px-6 py-4">DevOps Engineer</td>
+            <td class="px-6 py-4">Closed</td>
+            <td class="px-6 py-4">Infrastructure</td>
+            <td class="px-6 py-4">Remote</td>
+            <td class="px-6 py-4">30</td>
+            <td class="px-6 py-4">83/100</td>
+            <td class="px-6 py-4 text-right">
+              <a href="#" onclick="event.preventDefault()" class="bg-pink-500 hover:bg-pink-600 px-4 py-2 rounded-full text-sm shadow">
+                View Dashboard
+              </a>
+            </td>
+          </tr>
+          <tr class="bg-indigo-900">
+            <td class="px-6 py-4">Marketing Specialist</td>
+            <td class="px-6 py-4">On Hold</td>
+            <td class="px-6 py-4">Marketing</td>
+            <td class="px-6 py-4">Chicago, IL</td>
+            <td class="px-6 py-4">70</td>
+            <td class="px-6 py-4">90/100</td>
+            <td class="px-6 py-4 text-right">
+              <a href="#" onclick="event.preventDefault()" class="bg-pink-500 hover:bg-pink-600 px-4 py-2 rounded-full text-sm shadow">
+                View Dashboard
+              </a>
+            </td>
+          </tr>
+          <tr class="bg-indigo-800">
+            <td class="px-6 py-4">HR Coordinator</td>
+            <td class="px-6 py-4">Draft</td>
+            <td class="px-6 py-4">Human Resources</td>
+            <td class="px-6 py-4">Austin, TX</td>
+            <td class="px-6 py-4">N/A</td>
+            <td class="px-6 py-4">N/A</td>
+          </tr>
+          <tr class="bg-indigo-900">
+            <td class="px-6 py-4">Customer Success Manager</td>
+            <td class="px-6 py-4">Open</td>
+            <td class="px-6 py-4">Customer Success</td>
+            <td class="px-6 py-4">Seattle, WA</td>
+            <td class="px-6 py-4">50</td>
+            <td class="px-6 py-4">87/100</td>
+            <td class="px-6 py-4 text-right">
+              <a href="#" onclick="event.preventDefault()" class="bg-pink-500 hover:bg-pink-600 px-4 py-2 rounded-full text-sm shadow">
+                View Dashboard
+              </a>
+            </td>
+          </tr>
+          <!-- Add more rows as needed -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-indigo-800 py-6">
+    <div class="max-w-6xl mx-auto px-4 text-center text-sm text-pink-300">
+      &copy; 2025 O‑Jen AI. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>

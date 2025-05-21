@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>O‑Jen AI Recruitment</title>
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-black via-gray-900 to-purple-900 text-white min-h-screen flex flex-col">
+
+  <!-- Navbar -->
+  <nav class="bg-gradient-to-r from-indigo-800 to-purple-800 shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <!-- Logo + Home Link -->
+      <a href="home.html" class="flex items-center space-x-2">
+        <img src="logo.png" alt="O‑Jen Logo" class="h-10 w-10"/>
+        <span class="text-xl font-semibold tracking-wide">O‑Jen AI</span>
+      </a>
+
+      <!-- Main Nav Links -->
+      <ul class="hidden md:flex space-x-6">
+        <li><a href="joblists.html" class="hover:text-pink-300 transition">Jobs</a></li>
+        <li><a href="#" class="hover:text-pink-300 transition">Global Dashboard</a></li>
+        <li><a href="#" class="hover:text-pink-300 transition">Analytics</a></li>
+        <li><a href="#" class="hover:text-pink-300 transition">Reports</a></li>
+        <li><a href="#" class="hover:text-pink-300 transition">What’s New</a></li>
+      </ul>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center space-x-4">
+        <button aria-label="Search">
+          <img src="search.png" alt="Search" class="h-5 w-5 hover:opacity-80"/>
+        </button>
+        <button aria-label="Settings">
+          <img src="settings.png" alt="Settings" class="h-5 w-5 hover:opacity-80"/>
+        </button>
+        <!-- <button class="bg-pink-500 hover:bg-pink-600 text-white px-4 py-1 rounded-lg shadow-lg transition">
+          Log In
+        </button> -->
+        <button aria-label="Profile" class="hover:bg-pink-600 rounded-full transition">
+          <img src="profile.jpeg" alt="Profile" class="h-10 w-10 rounded-full"/>
+        </button>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button class="md:hidden ml-4" aria-label="Open menu">
+        <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round"
+             d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <main class="flex-grow flex flex-col items-center justify-center px-4 text-center">
+    <h1 class="text-5xl font-extrabold mb-4">Welcome to Our Jen AI Hiring System</h1>
+    <p class="text-lg mb-8 max-w-lg">
+      Streamline your recruitment with fairness‑first AI:  
+      audit bias, visualize candidate fit, and keep every hire transparent.
+    </p>
+    <!-- <a
+      href="dashboard.html"
+      class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-full shadow-xl transition"
+    >
+      Go to Fairness Dashboard
+    </a> -->
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-indigo-800 py-6">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between space-y-2">
+      <div class="flex items-center space-x-2">
+        <img src="logo.png" alt="O‑Jen Logo" class="h-8 w-8"/>
+        <span class="text-sm">&copy; 2025 O‑Jen AI. All rights reserved.</span>
+      </div>
+      <div class="flex space-x-4">
+        <a href="#" class="text-pink-300 hover:underline text-sm">Privacy</a>
+        <a href="#" class="text-pink-300 hover:underline text-sm">Terms</a>
+        <a href="#" class="text-pink-300 hover:underline text-sm">Help</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

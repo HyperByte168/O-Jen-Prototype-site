@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>O‑Jen AI Fairness Dashboard</title>
+  <!-- Tailwind via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+</head>
+<body class="bg-gradient-to-br from-black via-gray-900 to-purple-900 text-white">
+
+  <!-- Navbar -->
+  <nav class="bg-gradient-to-r from-indigo-800 to-purple-800 shadow-lg p-4">
+    <div class="container mx-auto flex items-center justify-between px-4">
+      <a href="home.html" class="flex items-center space-x-2">
+        <img src="logo.png" alt="O-Jen Logo" class="h-12 w-12"/>
+        <span class="text-2xl font-semibold tracking-wide">Our-Jen AI Hiring Admin</span>
+      </a>
+      <ul class="flex items-center space-x-6">
+        <li><a href="dashboard.html" class="text-pink-300 font-medium">Dashboard</a></li>
+        <li><a href="#transparency" class="hover:text-pink-300 transition">Transparency</a></li>
+        <li><a href="#reports" class="hover:text-pink-300 transition">Reports</a></li>
+        <!-- New Report Button -->
+        <li>
+          <a href="#report_platform" class="bg-red-600 hover:bg-red-700 p-2 rounded-lg flex items-center">
+            <img src="report.png" alt="Report" class="h-6 w-6"/>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Back to Home Button -->
+  <div class="container mx-auto px-4 mt-4">
+    <a
+      href="joblists.html"
+      class="inline-block bg-purple-700 hover:bg-purple-600 text-white px-4 py-2 rounded-md shadow transition"
+    >
+      ← Jobs
+    </a>
+  </div>
+
+  <!-- Fairness Dashboard Page -->
+  <main id="fairness" class="container mx-auto px-4 mt-8">
+    <h2 class="text-3xl font-semibold mb-6">Fairness Dashboard</h2>
+
+    <!-- Summary Cards -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-indigo-800 rounded-2xl shadow-lg p-6">
+        <h3 class="text-lg font-medium mb-2 text-pink-300">Overall Fairness Score</h3>
+        <p class="text-3xl font-bold">82/100</p>
+      </div>
+      <div class="bg-indigo-800 rounded-2xl shadow-lg p-6">
+        <h3 class="text-lg font-medium mb-2 text-pink-300">Last Audit Date</h3>
+        <p class="text-3xl font-bold">May 1, 2025</p>
+      </div>
+      <div class="bg-indigo-800 rounded-2xl shadow-lg p-6">
+        <h3 class="text-lg font-medium mb-2 text-pink-300">Groups Monitored</h3>
+        <p class="text-3xl font-bold">Gender, Ethnicity, Age</p> 
+      </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="flex flex-wrap items-center mb-6">
+      <label for="groupFilter" class="mr-4 font-medium">Filter by:</label>
+      <select id="groupFilter" class="bg-purple-700 text-white border-transparent rounded p-2 mr-6">
+        <option>Gender</option>
+        <option>Ethnicity</option>
+        <option>Age Group</option>
+      </select>
+      <label for="timeFilter" class="mr-4 font-medium">Time Frame:</label>
+      <select id="timeFilter" class="bg-purple-700 text-white border-transparent rounded p-2">
+        <option>Last 7 days</option>
+        <option>Last 30 days</option>
+        <option>Last Quarter</option>
+      </select>
+    </section>
+
+    <!-- Charts Panel -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <!-- Bar Chart Card -->
+      <div class="bg-indigo-800 rounded-2xl shadow-lg p-6">
+        <h3 class="text-lg font-medium mb-4 text-pink-300">Selection Rates by Gender</h3>
+        <canvas id="barChart" class="h-64"></canvas>
+      </div>
+
+      <!-- Pie Charts Card -->
+      <div class="bg-indigo-800 rounded-2xl shadow-lg p-6">
+        <h3 class="text-lg font-medium mb-4 text-pink-300">Applicant vs. Selected Distribution</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <p class="text-center mb-2 font-medium">Applicant Pool</p>
+            <canvas id="pieApplicants"></canvas>
+          </div>
+          <div>
+            <p class="text-center mb-2 font-medium">Selected Pool</p>
+            <canvas id="pieSelected"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Alerts & Export -->
+    <section class="mt-8 flex flex-col md:flex-row items-start md:items-center justify-between">
+      <div class="bg-yellow-500 bg-opacity-20 border-l-4 border-yellow-400 text-yellow-100 p-4 rounded mb-4 md:mb-0">
+        <p>⚠ Female selection rate is 10% below benchmark.</p>
+      </div>
+      <button class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-2xl shadow-lg transition">
+        Download Full Audit Report
+      </button>
+    </section>
+    <!-- Top Candidates Section with interactive selector -->
+    <section id="topCandidates" class="mt-12">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-2xl font-semibold text-white">Top Selected Candidates</h3>
+        <div>
+          <label for="numCandidates" class="text-white mr-2">Show:</label>
+          <select id="numCandidates" class="bg-purple-700 text-white rounded p-1">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="all">All</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="bg-indigo-800 rounded-2xl shadow-lg p-6 overflow-x-auto">
+        <table class="min-w-full table-auto text-white">
+          <thead class="bg-purple-700">
+            <tr>
+              <th class="px-4 py-2 text-left">Name</th>
+              <th class="px-4 py-2 text-left">Match Score (%)</th>
+              <th class="px-4 py-2 text-left">Demographic</th>
+              <th class="px-4 py-2 text-left">Status</th>
+            </tr>
+          </thead>
+          <tbody id="candidateBody">
+            <!-- JS will inject rows here -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <script>
+       // Register the plugin
+      Chart.register(ChartDataLabels);
+
+      // Dummy data array
+      const allCandidates = [
+        { name: 'Alice Johnson', score: 95, demo: 'Female', status: 'Advanced' },
+        { name: 'Michael Lee',   score: 92, demo: 'Male',   status: 'Advanced' },
+        { name: 'Sara Patel',     score: 90, demo: 'Female', status: 'Advanced' },
+        { name: 'David Kim',      score: 88, demo: 'Male',   status: 'Advanced' },
+        { name: 'Lina Gomez',     score: 85, demo: 'Female', status: 'Advanced' },
+        { name: 'Omar Hassan',    score: 83, demo: 'Male',   status: 'Advanced' },
+        { name: 'Nina Rossi',     score: 82, demo: 'Female', status: 'Advanced' },
+        { name: 'Samir Gupta',    score: 80, demo: 'Male',   status: 'Advanced' },
+        { name: 'Elena Novak',    score: 78, demo: 'Female', status: 'Advanced' },
+        { name: 'Jae Park',       score: 76, demo: 'Male',  status: 'Advanced' },
+        // ...add more as needed
+      ];
+
+      const tbody = document.getElementById('candidateBody');
+      const selector = document.getElementById('numCandidates');
+      function renderCandidates() {
+        // determine how many to show
+        let limit = selector.value === 'all'
+          ? allCandidates.length
+          : parseInt(selector.value, 10);
+
+        // clear out old rows
+        tbody.innerHTML = '';
+
+        // build new rows
+        allCandidates.slice(0, limit).forEach((c, i) => {
+          const tr = document.createElement('tr');
+          // alternate row background
+          tr.className = 'border-t ' + (i % 2 === 0 ? 'border-purple-600' : 'bg-indigo-900');
+          tr.innerHTML = `
+            <td class="px-4 py-2">${c.name}</td>
+            <td class="px-4 py-2">${c.score}</td>
+            <td class="px-4 py-2">${c.demo}</td>
+            <td class="px-4 py-2 text-green-300">${c.status}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      // initial render
+      renderCandidates();
+
+      // re-render on selector change
+      selector.addEventListener('change', renderCandidates);
+
+      // ==== Chart.js Initialization ====
+    
+      // Bar Chart
+      const ctxBar = document.getElementById('barChart').getContext('2d');
+      new Chart(ctxBar, {
+        type: 'bar',
+        data: {
+          labels: ['Male', 'Female'],
+          datasets: [{
+            label: 'Selection Rate (%)',
+            data: [25, 15],
+            backgroundColor: ['rgba(200,200,255,0.8)', 'rgba(255,180,220,0.8)'],
+            borderRadius: 5,
+          }]
+        },
+        options: {
+          scales: {
+            x: {
+              ticks: { color: '#fff' },
+              grid:  { color: 'rgba(255,255,255,0.2)' }
+            },
+            y: {
+              beginAtZero: true,
+              max: 30,
+              ticks: { color: '#fff' },
+              grid:  { color: 'rgba(255,255,255,0.2)' }
+            }
+          },
+          plugins: {
+            legend: {
+              labels: { color: '#fff' }
+            },
+            datalabels: {
+              color: '#fff',        // white text
+              anchor: 'end',        // position at top of bar
+              align: 'start',       // inside the bar
+              formatter: (value) => value + '%',  // append percent sign
+              font: { weight: 'bold', size: 12 }
+            }
+          }
+        }
+      });
+
+      // Applicant Pool Pie 
+      const ctxApplicants = document.getElementById('pieApplicants').getContext('2d');
+      new Chart(ctxApplicants, {
+        type: 'pie',
+        data: {
+          labels: ['Male', 'Female'],
+          datasets: [{
+            data: [50, 50], // adjust to sum to 100 or your actual counts
+            backgroundColor: [
+              'rgba(180,180,255,0.8)',
+              'rgba(255,200,230,0.8)'
+            ]
+          }]
+        },
+        options: {
+          plugins: {
+            datalabels: {
+              color: '#fff',
+              formatter: (value, ctx) => {
+                const dataArr = ctx.chart.data.datasets[0].data;
+                const total = dataArr.reduce((sum, v) => sum + v, 0);
+                return (value / total * 100).toFixed(1) + '%';
+              },
+              font: { weight: 'bold', size: 14 }
+            },
+            legend: {
+              labels: { color: '#fff' }
+            }
+          }
+        }
+      });
+
+      // Selected Pool Pie 
+      const ctxSelected = document.getElementById('pieSelected').getContext('2d');
+      new Chart(ctxSelected, {
+        type: 'pie',
+        data: {
+          labels: ['Male', 'Female'],
+          datasets: [{
+            data: [62, 38], // adjust as needed
+            backgroundColor: [
+              'rgba(180,180,255,0.8)',
+              'rgba(255,200,230,0.8)'
+            ]
+          }]
+        },
+        options: {
+          plugins: {
+            datalabels: {
+              color: '#fff',
+              formatter: (value, ctx) => {
+                const dataArr = ctx.chart.data.datasets[0].data;
+                const total = dataArr.reduce((sum, v) => sum + v, 0);
+                return (value / total * 100).toFixed(1) + '%';
+              },
+              font: { weight: 'bold', size: 14 }
+            },
+            legend: {
+              labels: { color: '#fff' }
+            }
+          }
+        }
+      });
+    </script>
+
+</body>
+</html>
